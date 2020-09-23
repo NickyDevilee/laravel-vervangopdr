@@ -22,13 +22,13 @@
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">ID</label>
-                                    <input type="text" class="form-control" name="id" value="{{ $item[0]->id }}" />
+                                    <input type="text" class="form-control" name="id" value="{{ $item->id }}" readonly="true" />
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Title</label>
-                                    <input type="text" class="form-control" name="title" value="{{ $item[0]->title }}" />
+                                    <input type="text" class="form-control" name="title" value="{{ $item->title }}" />
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-warning">Update</button>
                             </form>
                         </div>
                     </div>

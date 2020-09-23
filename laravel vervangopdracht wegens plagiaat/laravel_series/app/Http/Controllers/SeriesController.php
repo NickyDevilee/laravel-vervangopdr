@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Serie;
 
 class SeriesController extends Controller
 {
@@ -11,7 +12,7 @@ class SeriesController extends Controller
 
     public function GetAll()
     {
-    	$results = DB::select('select * from series');
+    	$results = Serie::all();
     	if ($results) {
     		return view('opdracht.index', ['items' => $results]);
     	}
@@ -19,7 +20,8 @@ class SeriesController extends Controller
 
     public function GetFromID($id, $function)
     {
-        $result = DB::select('select * from series where id = (?)', [$id]);
+        $result = Serie::find($id);
+
         if ($result) {
             if ($function == 'edit') {
                 return view('opdracht.edit', ['item' => $result]);
@@ -32,7 +34,6 @@ class SeriesController extends Controller
     public function Insert(request $request)
     {
         $title = $request->input('title');
-
     	$insert = DB::insert('insert into series (title) values (?)', [$title]);
 
     	if ($insert) {
@@ -44,7 +45,6 @@ class SeriesController extends Controller
     {
         $id = $request->input('id');
         $title = $request->input('title');
-
     	$update = DB::update('update series set title = (?) where id = (?)', [$title, $id]);
 
     	if ($update) {
@@ -55,7 +55,6 @@ class SeriesController extends Controller
     public function Delete(request $request)
     {
         $id = $request->input('id');
-
     	$delete = DB::delete('delete from series where id = (?)', [$id]);
 
     	if ($delete) {
